@@ -67,7 +67,17 @@ function createBoard () {
     }
 }
 
-createBoard();
+function flipCard() {
+    const cardId = this.getAttribute('data-id')    
+    cardsChosen.push(cardArray[cardId].name)
+    cardsChosenIds.push(cardId)
+    this.setAttribute('src', cardArray[cardId].img)
+    if (cardsChosen.length === 2) {
+        setTimeout( checkMatch, 500)
+    }
+}
+
+
 
 function checkMatch() {
     const cards = document.querySelectorAll('#grid img')
@@ -103,12 +113,9 @@ function checkMatch() {
     }
 }
 
-function flipCard() {
-    const cardId = this.getAttribute('data-id')    
-    cardsChosen.push(cardArray[cardId].name)
-    cardsChosenIds.push(cardId)
-    this.setAttribute('src', cardArray[cardId].img)
-    if (cardsChosen.length === 2) {
-        setTimeout( checkMatch, 500)
-    }
-}
+createBoard();
+
+document.querySelector('.restart').addEventListener('click', function(){
+    window.location.reload();
+    return false;
+  });
